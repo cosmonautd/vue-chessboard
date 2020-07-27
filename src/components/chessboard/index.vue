@@ -14,24 +14,28 @@ export default {
   props: {
     fen: {
       type: String,
-      default: '',
+      default: ''
     },
     free: {
       type: Boolean,
-      default: false,
+      default: false
     },
     showThreats: {
       type: Boolean,
-      default: false,
+      default: false
     },
     onPromotion: {
       type: Function,
-      default: () => 'q',
+      default: () => 'q'
     },
     orientation: {
       type: String,
-      default: 'white',
+      default: 'white'
     },
+    fixedColor: {
+      type: String,
+      default: null
+    }
   },
   watch: {
     fen: function (newFen) {
@@ -47,7 +51,7 @@ export default {
       if (this.showThreats) {
         this.paintThreats()
       }
-    },
+    }
   },
   methods: {
     possibleMoves () {
@@ -113,9 +117,9 @@ export default {
           fen: this.game.fen(),
           turnColor: this.toColor(),
           movable: {
-            color: this.toColor(),
-            dests: this.possibleMoves(),
-          },
+            color: this.fixedColor ? this.fixedColor : this.toColor(),
+            dests: this.possibleMoves()
+          }
         })
         this.calculatePromotions()
         this.afterMove()
@@ -164,17 +168,17 @@ export default {
         fen: this.game.fen(),
         turnColor: this.toColor(),
         movable: {
-          color: this.toColor(),
+          color: this.fixedColor ? this.fixedColor : this.toColor(),
           free: this.free,
-          dests: this.possibleMoves(),
+          dests: this.possibleMoves()
         },
-        orientation: this.orientation,
+        orientation: this.orientation
       })
       this.board.set({
-        movable: { events: { after: this.changeTurn() } },
+        movable: { events: { after: this.changeTurn() } }
       })
       this.afterMove()
-    },
+    }
   },
   mounted () {
     this.loadPosition()
@@ -184,6 +188,6 @@ export default {
     this.board = null
     this.promotions = []
     this.promoteTo = 'q'
-  },
+  }
 }
 </script>

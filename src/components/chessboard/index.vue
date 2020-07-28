@@ -1,6 +1,6 @@
 <template>
   <div class="blue merida">
-    <div ref="board" class="cg-board-wrap"></div> </br>
+    <div ref="board" class="cg-board-wrap" :style="{width: size+'px', height: size+'px'}"></div>
   </div>
 </template>
 
@@ -32,10 +32,14 @@ export default {
       type: String,
       default: 'white'
     },
-    fixedColor: {
+    player: {
       type: String,
       default: null
-    }
+	},
+	size: {
+		type: String,
+      	required: true
+	}
   },
   watch: {
     fen: function (newFen) {
@@ -117,7 +121,7 @@ export default {
           fen: this.game.fen(),
           turnColor: this.toColor(),
           movable: {
-            color: this.fixedColor ? this.fixedColor : this.toColor(),
+            color: this.player ? this.player : this.toColor(),
             dests: this.possibleMoves()
           }
         })
@@ -168,11 +172,12 @@ export default {
         fen: this.game.fen(),
         turnColor: this.toColor(),
         movable: {
-          color: this.fixedColor ? this.fixedColor : this.toColor(),
+          color: this.player ? this.player : this.toColor(),
           free: this.free,
           dests: this.possibleMoves()
         },
-        orientation: this.orientation
+		orientation: this.orientation,
+		resizable: true
       })
       this.board.set({
         movable: { events: { after: this.changeTurn() } }

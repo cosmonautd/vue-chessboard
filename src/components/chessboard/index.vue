@@ -176,8 +176,12 @@ export default {
           free: this.free,
           dests: this.possibleMoves()
         },
-		orientation: this.orientation,
-		resizable: true
+		    orientation: this.orientation,
+        resizable: true,
+        highlight: {
+          lastMove: true,
+          check: true
+        }
       })
       this.board.set({
         movable: { events: { after: this.changeTurn() } }

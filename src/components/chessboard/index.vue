@@ -1,6 +1,6 @@
 <template>
   <div class="blue merida">
-    <div ref="board" class="cg-board-wrap" :style="{width: size+'px', height: size+'px'}"></div>
+    <div ref="board" class="cg-board-wrap" :style="{width: size+'px', height: size+'px', margin:'auto'}"></div>
   </div>
 </template>
 

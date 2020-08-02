@@ -1,5 +1,5 @@
 <template>
-  <div class="blue merida">
+  <div :class="boardClass">
     <div ref="board" class="cg-board-wrap" :style="{width: size+'px', height: size+'px', margin:'auto'}"></div>
   </div>
 </template>
@@ -37,6 +37,10 @@ export default {
       default: null
 	},
 	size: {
+		type: String,
+      	required: true
+	},
+	boardClass: {
 		type: String,
       	required: true
 	}
